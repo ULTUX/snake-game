@@ -17,11 +17,13 @@ class Snake {
         this.length = 3;
         this.food = [];
         this.snakeParts = [];
-        if (this.direct == 1)this.snakeParts.push(new SnakePart([this.translate(this.x-res), this.translate(this.y)], this.direct))
+        if (this.direct == 1) this.snakeParts.push(new SnakePart([this.translate(this.x-res), this.translate(this.y)], this.direct))
         else this.snakeParts.push(new SnakePart([this.translate(this.x+res), this.translate(this.y)], this.direct))
         for (let i = 0; i < this.length-1; i++){
             this.snakeParts.push(new SnakePart(this.getCords(i), this.direct));
         }
+        let lastx = 0;
+        let lasty = 0;
     }
 
 
@@ -87,8 +89,11 @@ class Snake {
     }
 
     setDirection = (n)=>{
-        if (n == 1 || n == 2 || n == 3 || n == 4){
+        if (this.lastx != this.x || this.lasty != this.y && (n == 1 || n == 2 || n == 3 || n == 4)){
+            this.lastx = this.x;
+            this.lasty = this.y;
             this.direct = n;
+            this.addLastCords(this.translate(this.x), this.translate(this.y), this.direct);
         }
     }
 
