@@ -154,4 +154,4 @@ class SnakePart{
             this.y += res;
         }
     }
-}
+} 
