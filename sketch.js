@@ -20,6 +20,7 @@ function draw(){
 }
 
 
+
 let timer;
 function keyPressed(){
         if (keyCode == 39) {

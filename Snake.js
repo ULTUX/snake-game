@@ -3,7 +3,7 @@
 // 3 w gore
 // 4 w dol
 
-let res = 15;
+let res = 20;
 
 class Snake {
     constructor (x, y){
@@ -36,24 +36,26 @@ class Snake {
         }
     }
 
-    ifEaten(){
+    async ifEaten(){
         for (let i of this.food){
             if (this.translate(this.x) == this.translate(i.x) && this.translate(this.y) == this.translate(i.y)){
                 this.food.splice(this.food.indexOf(i), 1);
                 let lastdirect = this.snakeParts[this.snakeParts.length-1].direct;
-                this.snakeParts.push(new SnakePart(this.getCords(), lastdirect));
-                this.snakeParts[this.snakeParts.length-1].lastCords = this.snakeParts[this.snakeParts.length-2].lastCords.slice(0);
+                await this.snakeParts.push(new SnakePart(this.getCords(), lastdirect));
+                await this.copyArray(this.snakeParts[this.snakeParts.length-1].lastCords);
+                
                 
             }
         }
     }
 
-    addOne(){
-        let lastdirect = this.snakeParts[this.snakeParts.length-1].direct;
-        this.snakeParts.push(new SnakePart(this.getCords(), lastdirect));
-        this.snakeParts[this.snakeParts.length-1].lastCords = [...this.snakeParts[this.snakeParts.length-2].lastCords];
-    }
 
+
+    copyArray(arr){
+        for (let i = 0; i < arr.length; i++){
+            arr[i] = this.snakeParts[this.snakeParts.length-2].lastCords[i];
+        }
+    }
 
     gameEnd(){
         if (this.translate(this.x) <= 0 || this.translate(this.x) >= this.translate(width) ||
@@ -84,7 +86,7 @@ class Snake {
         let length = this.snakeParts.length;
         if (this.snakeParts[length-1].direct == 1) return [this.translate(this.snakeParts[length-1].x-res), this.translate(this.snakeParts[length-1 ].y)];
         else if (this.snakeParts[length-1].direct == 2) return [this.translate(this.snakeParts[length-1].x+res), this.translate(this.snakeParts[length-1].y)];
-        else if (this.snakeParts[length-1].direct == 3) return [this.translate(this.snakeParts[length-1].x), this.translate(this.snakeParts[length-1].y)];
+        else if (this.snakeParts[length-1].direct == 3) return [this.translate(this.snakeParts[length-1].x), this.translate(this.snakeParts[length-1].y-res)];
         else if (this.snakeParts[length-1].direct == 4) return [this.translate(this.snakeParts[length-1].x), this.translate(this.snakeParts[length-1].y+res)];
     }
 
