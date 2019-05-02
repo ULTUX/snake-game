@@ -36,11 +36,12 @@ class Snake {
 
     ifEaten(){
         for (let i of this.food){
-            if (this.translate(this.x) == i.x && this.translate(this.y) == i.y){
+            if (this.translate(this.x) == this.translate(i.x) && this.translate(this.y) == this.translate(i.y)){
+                this.food.splice(this.food.indexOf(i), 1);
                 let lastdirect = this.snakeParts[this.snakeParts.length-1].direct;
                 this.snakeParts.push(new SnakePart(this.getCords(), lastdirect));
                 this.snakeParts[this.snakeParts.length-1].lastCords = this.snakeParts[this.snakeParts.length-2].lastCords.slice(0);
-                this.food.splice(i, 1);
+                
             }
         }
     }
@@ -93,7 +94,6 @@ class Snake {
 
     move = () =>{
         if (!this.gameFinished){
-            console.log(this.snakeParts[this.snakeParts.length-1].lastCords)
             if (this.direct == 1) {
                 this.x += res;
             }
