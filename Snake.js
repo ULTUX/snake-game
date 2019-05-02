@@ -67,7 +67,7 @@ class Snake {
 
 
     translate(coord){
-        return Math.floor(coord/res)*res;
+        return Math.round(coord/res)*res;
     }
 
     addLastCords(x, y, dir){

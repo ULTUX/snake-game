@@ -6,7 +6,7 @@
 let snake;
 function setup(){
     createCanvas(750, 750);
-    snake = new Snake(Math.floor(random(0, Math.floor(width/res)*res)/res)*res, Math.floor(random(0, Math.floor(height/res)*res)/res)*res);
+    snake = new Snake(Math.round(random(0, Math.round(width/res)*res)/res)*res, Math.round(random(0, Math.round(height/res)*res)/res)*res);
     frameRate(10);
 }
 let k = 0;
